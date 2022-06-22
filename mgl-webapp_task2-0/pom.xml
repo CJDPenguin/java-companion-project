@@ -203,10 +203,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.22.2</version>
-				<configuration>
-		            <testFailureIgnore>true</testFailureIgnore>
-				</configuration>
+				<version>${maven.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>perform-it</id>
