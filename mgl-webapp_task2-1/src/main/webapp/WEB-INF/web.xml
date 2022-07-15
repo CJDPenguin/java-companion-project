@@ -2,7 +2,22 @@
  		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  		  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name>bootcamper-project</display-name>
-	
+ 	<!--  What is this? 
+		  This file is named web.xml, and resides in the app's WAR under the WEB-INF/ directory. web.xml is part of the servlet standard for web applications.
+		  
+		  Java web applications can sometimes use a deployment descriptor file like this to:
+		   - determine how URLs map to servlets,
+		   - which URLs require authentication,
+		   - and other information, like human readable descriptors of resources for IDEs. 
+		  
+		  Be aware that the configuration and specification here, can conflict with servlet specifications
+		  defined by Spring Servlet Java Configurations in a class implementing the org.springframework.web.WebApplicationInitializer
+		  
+		  Read More: 
+		  http://wiki.metawerx.net/wiki/Web.xml 
+		  https://cloud.google.com/appengine/docs/standard/java/config/webxml
+		  https://jcp.org/aboutJava/communityprocess/final/jsr315/index.html	  
+ 	 -->
 	<filter>
 		<filter-name>encoding-filter</filter-name>
 		<filter-class>
