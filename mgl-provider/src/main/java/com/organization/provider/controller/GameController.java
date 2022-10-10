@@ -54,7 +54,7 @@ public class GameController {
 
 	@RequestMapping(value="/",
 			method={RequestMethod.POST,RequestMethod.PUT}, 
-			consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
+			consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createGame(@RequestBody GameImpl game) {
 		Game savedGame = gameService.saveGame(game);
 		logger.info("Game id created is: {}", savedGame.getId());

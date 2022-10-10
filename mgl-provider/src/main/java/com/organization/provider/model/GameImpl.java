@@ -1,14 +1,25 @@
 package com.organization.provider.model;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.organization.mvcproject.api.model.Game;
 
-@Component
+@Table(name = "GAME")
+@Entity
 public class GameImpl implements Game {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Long id;
+	
+	@Column
 	String name;
+	@Column
 	String genre;
 	
 	public Long getId() {

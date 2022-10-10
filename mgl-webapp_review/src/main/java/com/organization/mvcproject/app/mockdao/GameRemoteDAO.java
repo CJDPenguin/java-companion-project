@@ -1,13 +1,12 @@
 package com.organization.mvcproject.app.mockdao;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.common.collect.ImmutableList;
 import com.organization.mvcproject.api.mockdao.GameDAO;
 import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.app.model.GameImpl;
@@ -52,15 +52,15 @@ public class GameRemoteDAO implements GameDAO{
 	@Override
 	public List<Game> findAllGames() {
 		String requestUri = serviceBaseUrl + RESOURCE_URI;
-		ResponseEntity<GameImpl[]> jobs = restTemplate.getForEntity(
-				requestUri,
-				GameImpl[].class);
+		ResponseEntity<List<GameImpl>> response = restTemplate.exchange(
+				requestUri, HttpMethod.GET, null,  new ParameterizedTypeReference<List<GameImpl>>(){});
 		
-
-		List<Game> games = Arrays.stream(jobs.getBody())
-				.collect(Collectors.toList());
-		
-		return games;
+		if(response.getStatusCode() != HttpStatus.OK) {
+			logger.error("GET: "+ requestUri + " did not recieve an ok status response OK Status");
+			return null;
+		} else {
+			return ImmutableList.copyOf( response.getBody());
+		}
 	}
 
 	@Override
@@ -89,15 +89,11 @@ public class GameRemoteDAO implements GameDAO{
 	@Override
 	public List<Game> findGamesByGenre(String genre) {
 		String requestUri = serviceBaseUrl + RESOURCE_URI;
-		ResponseEntity<Game[]> jobs = restTemplate.getForEntity(
+		ResponseEntity<Game[]> games = restTemplate.getForEntity(
 				requestUri,
 				Game[].class);
-		
-
-		List<Game> games = Arrays.stream(jobs.getBody())
-				.collect(Collectors.toList());
-		
-		return games; 
+				
+		return null; 
 	}
 
 
