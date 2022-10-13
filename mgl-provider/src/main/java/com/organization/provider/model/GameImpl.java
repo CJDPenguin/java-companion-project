@@ -14,7 +14,7 @@ import com.organization.mvcproject.api.model.Game;
 public class GameImpl implements Game {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	Long id;
 	
 	@Column
