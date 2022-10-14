@@ -2,11 +2,14 @@ package com.organization.provider.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,43 +21,49 @@ import com.organization.provider.model.GameImpl;
 @Repository
 public class GameDAOImpl implements GameDAO  {
 	
-	//TODO replace with EntityManager
 	@Autowired
-	private SessionFactory sessionFactory; 
-	
+    private EntityManager em;
+
 	@Override
 	public Game findGameById(Long id) {
-		String hql = "FROM Game g WHERE g.id = :id"; 
-		Query query = sessionFactory.openSession().createQuery(hql);
+		Query query = em.createQuery("FROM Game g WHERE g.id = :id"); 
 		query.setParameter("id", id);
-		return (Game) query.uniqueResult();
+		return (Game) query.getResultList();
 	}
 
 	@Override
 	public List<Game> findGamesByGenre(String genre) {
-		String hql = "FROM Gmae g WHERE g.genere = :genre"; // HQL Query
-		Query query = sessionFactory.openSession().createQuery(hql);
-		query.setParameter("genere", genre);
-		return  ImmutableList.copyOf(query.getResultList());
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+	    CriteriaQuery<GameImpl> cq = cb.createQuery(GameImpl.class);
+	    Root<GameImpl> game = cq.from(GameImpl.class);
+        Predicate genrePredicate = cb.equal(game.get("genre"), genre);
+        cq.where(genrePredicate);
+        TypedQuery<GameImpl> query = em.createQuery(cq);
+        return ImmutableList.copyOf(query.getResultList());
 	}
 
 	@Override
 	public Game saveGame(Game game) {
-		sessionFactory.getCurrentSession().saveOrUpdate(game);
+		em.persist((GameImpl) game);
 		return game; //returns with ID
 	}
 
 	@Override
 	public boolean deleteGame(Long id) {
-		Query query = sessionFactory.getCurrentSession().createSQLQuery("DELETE FROM Game WHERE ID = :ID");
-		query.setLong("ID", id);
+		Query query = em.createQuery("DELETE FROM Game WHERE ID = :ID");
+		query.setParameter("id", id);		
 		return (0 > query.executeUpdate());
 	}
 
 	@Override
 	public List<Game> findAllGames() {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(GameImpl.class);
-        return  ImmutableList.copyOf(criteria.list());
+		
+		 CriteriaBuilder cb = em.getCriteriaBuilder();
+		    CriteriaQuery<GameImpl> cq = cb.createQuery(GameImpl.class);
+		    Root<GameImpl> root = cq.from(GameImpl.class);
+		    CriteriaQuery<GameImpl> all = cq.select(root);
+		    return ImmutableList.copyOf(em.createQuery(all).getResultList());
+	
 	}
 	
 	
