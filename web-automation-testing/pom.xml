@@ -167,7 +167,6 @@
 		        </executions>
 		    </plugin>
 			<plugin>
-			    <!-- unit tests (surefire) -->
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-failsafe-plugin</artifactId>
 	            <version>${maven.plugin.version}</version>

@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-class BrowserSetup {
+public class BrowserSetup {
 
 	
 	  WebDriver driver;
