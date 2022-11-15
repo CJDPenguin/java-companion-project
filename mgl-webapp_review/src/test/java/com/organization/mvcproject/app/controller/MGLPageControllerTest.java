@@ -42,7 +42,7 @@ class MGLPageControllerTest {
 		.andExpect(status().isOk())
 		.andExpect(view().name("reviewCreatePage"));
 	}
-		
+	
 	@Test
 	 void gamesPagePathReportsOKStatus() throws Exception {
 		this.mockMvc.perform(get("/games"))
