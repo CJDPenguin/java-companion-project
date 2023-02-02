@@ -6,14 +6,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-//TODO 1.0 remove @Component annotation, it is not used
-@Component
 public class Company {
 
 	private Long id;
-	private String name;
-	//TODO 1.0 this List doesn't need to be initialized at declaration. 
-	private List<Game> gamesMade = new ArrayList<Game>();
+	private String name; 
+	private List<Game> gamesMade;
 
 	public Long getId() {
 		return id;

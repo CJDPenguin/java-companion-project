@@ -81,13 +81,10 @@
 		    <version>1.2</version>
 		</dependency>
 
-
-		<!-- Logging TODO: upgrade logging to use log4j-slf4j-impl -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-			<scope>runtime</scope>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-simple</artifactId>
+		    <version>1.7.32</version>
 		</dependency>
 
 		<!-- JSR-330 for @Inject -->
