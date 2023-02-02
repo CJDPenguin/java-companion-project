@@ -6,8 +6,8 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
         <script src="resources/static/js/app.js" /></script>
-        <script src="resources/static/js/MGL_Task1.service.js"></script>
-        <script src="resources/static/js/MGL_Task1.controller.js"></script>
+        <script src="resources/static/js/service/MGL_Task1.service.js"></script>
+        <script src="resources/static/js/controller/MGL_Task1.controller.js"></script>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -39,11 +39,11 @@
                             <div class="form-group col-md-12">
                                 <label class="col-md-2 control-lable text-light" for="game_name">Name*</label>
                                 <div class="col-md-7">
-                                    <input type="text" ng-model="MGL_T1_ctrl.game.game_name" id="game_name" class="game_name form-control input-sm" placeholder="Enter the name of the new game [required]" required ng-minlength="3" />
+                                    <input type="text" ng-model="MGL_T1_ctrl.game.name" id="game_name" class="game_name form-control input-sm" placeholder="Enter the name of the new game [required]" required ng-minlength="3" />
                                     <div class="has-error" ng-show="gameForm.$dirty">
-                                        <span ng-show="gameForm.game_name.$error.required">This is a required field</span>
-                                        <span ng-show="gameForm.game_name.$error.minlength">Minimum length required is 3</span>
-                                        <span ng-show="gameForm.game_name.$invalid">This field is invalid </span>
+                                        <span ng-show="gameForm.name.$error.required">This is a required field</span>
+                                        <span ng-show="gameForm.name.$error.minlength">Minimum length required is 3</span>
+                                        <span ng-show="gameForm.name.$invalid">This field is invalid </span>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             <div class="form-group col-md-12">
                                 <label class="col-md-2 control-lable text-light" for="game_genre">Game Genre</label>
                                 <div class="col-md-7">
-                                    <input type="text" ng-model="MGL_T1_ctrl.game.game_genre" id="game_genre" class="form-control input-sm" placeholder="Enter the genre of the new game" />
+                                    <input type="text" ng-model="MGL_T1_ctrl.game.genre" id="game_genre" class="form-control input-sm" placeholder="Enter the genre of the new game" />
                                 </div>
                             </div>
                         </div>
@@ -81,8 +81,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="currentGame in MGL_T1_ctrl.games">
-                                <td><span ng-bind="currentGame.game_name"></span></td>
-                                <td><span ng-bind="currentGame.game_genre"></span></td>
+                                <td><span ng-bind="currentGame.name"></span></td>
+                                <td><span ng-bind="currentGame.genre"></span></td>
                                 <td>
                                 </td>
                             </tr>
